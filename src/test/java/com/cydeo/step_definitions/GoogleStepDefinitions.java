@@ -19,7 +19,7 @@ public class GoogleStepDefinitions {
     public void user_sees_apple_in_the_google_title() {
         String expectedTitle = "apple - Google'da Ara";
         String actualTitle = Driver.getDriver().getTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals("Title is not expected", expectedTitle, actualTitle);
 
     }
 
