@@ -1,4 +1,4 @@
-@Regression
+@Regression @login
 Feature: Library App login feature
   User story:
   As a user, I should be able to login with correct credentials to different accounts. And
