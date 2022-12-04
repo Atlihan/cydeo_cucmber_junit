@@ -11,24 +11,26 @@ public class GoogleStepDefinitions {
 
     GoogleSearchPage googleSearchPage = new GoogleSearchPage();
 
-    @When("user types {word} and clicks enter")
-    public void user_types_and_clicks_enter2(String searchKeyword) {
+    @When("user types apple and clicks enter")
+    public void user_types_and_clicks_enter() {
+        googleSearchPage.searchBox.sendKeys("apple" + Keys.ENTER);
+    }
+
+    @When("user types {string} and clicks enter")
+    public void userTypesAndClicksEnter(String searchKeyword) {
         googleSearchPage.searchBox.sendKeys(searchKeyword + Keys.ENTER);
     }
-    @When("user types {String} and clicks enter")
-    public void user_types_and_clicks_enter(String searchKeyword) {
-        googleSearchPage.searchBox.sendKeys(searchKeyword + Keys.ENTER);
-    }
-    @Then("user sees {String} in the google title")
-    public void user_sees_in_the_google_title(String string) {
-        String expectedTitle = string+ "- Google'da Ara";
+
+    @Then("user sees apple in the google title")
+    public void user_sees_in_the_google_title() {
+        String expectedTitle = "apple - Google'da Ara";
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertEquals("Title is not expected", expectedTitle, actualTitle);
     }
 
     @Then("user sees {word} in the google title")
     public void user_sees_apple_in_the_google_title(String word) {
-        String expectedTitle = word+"- Google'da Ara";
+        String expectedTitle = word+ " - Google'da Ara";
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertEquals("Title is not expected", expectedTitle, actualTitle);
 
@@ -47,4 +49,7 @@ public class GoogleStepDefinitions {
 
         Driver.closeDriver();
     }
+
+
+
 }

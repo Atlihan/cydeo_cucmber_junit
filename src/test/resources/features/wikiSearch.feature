@@ -20,8 +20,8 @@ Feature: Wikipedia search functionality and verifications
     Then User sees "<expectedTitle>" is in the wiki title
     Then user sees "<expectedMainHeader>" in the main header
 
-    Examples: search values we are going to be using in this scenario is as below
-      | searchValue       | expectedTitle     | expectedMainHeader |
-      | Steve Jobs        | Steve Jobs        | Steve Jobs         |
-      | Cristiano Ronaldo | Cristiano Ronaldo | Cristiano Ronaldo  |
-      | Bob Marley        | Bob Marley        | Bob Marley         |
+  Examples: search values we are going to be using in this scenario is as below
+    | searchValue       | expectedTitle     | expectedMainHeader |
+    | Steve Jobs        | Steve Jobs        | Steve Jobs         |
+    | Cristiano Ronaldo | Cristiano Ronaldo | Cristiano Ronaldo  |
+    | Bob Marley        | Bob Marley        | Bob Marley         |

@@ -28,9 +28,12 @@ public class Wiki_StepDefinitions {
         Assert.assertTrue(Driver.getDriver().getTitle().contains(string));
     }
 
-    @Then("user sees Steve Jobs in the main header")
-    public void userSeesSteveJobsInTheMainHeader() {
+ //   @Then("user sees Steve Jobs in the main header")
+   @Then("user sees {string} in the main header")
+   public void userSeesSteveJobsInTheMainHeader(String string) {
+   // public void userSeesSteveJobsInTheMainHeader() {
 
-
+    Assert.assertTrue(wikiSearchPage.mainHeader.isDisplayed());
+    Assert.assertTrue(wikiSearchPage.mainHeader.getText().equals(string));
     }
 }

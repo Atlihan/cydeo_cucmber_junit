@@ -4,8 +4,11 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -28,16 +31,16 @@ This method will accept int seconds and execute Thread.sleep for given duration
 3= expectedInTitle to be compared with actual title
      */
 
-    public static void switchWindowAndVerify(String expectedInUrl, String expectedInTitle){
+    public static void switchWindowAndVerify(String expectedInUrl, String expectedInTitle) {
 
         Set<String> allWindowHandles = Driver.getDriver().getWindowHandles();
 
         for (String each : Driver.getDriver().getWindowHandles()) {
             Driver.getDriver().switchTo().window(each);
 
-            System.out.println("Current URL : "+ Driver.getDriver().getCurrentUrl());
+            System.out.println("Current URL : " + Driver.getDriver().getCurrentUrl());
 
-            if (Driver.getDriver().getCurrentUrl().contains(expectedInUrl)){
+            if (Driver.getDriver().getCurrentUrl().contains(expectedInUrl)) {
                 break;
             }
         }
@@ -47,15 +50,43 @@ This method will accept int seconds and execute Thread.sleep for given duration
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertTrue(actualTitle.contains(expectedInTitle));
     }
+
     //This method accepts a String "expectedTitle" and Asserts if it is true
-    public static void verifyTitle (String expectedTitle){
+    public static void verifyTitle(String expectedTitle) {
 
         Assert.assertEquals(Driver.getDriver().getTitle(), expectedTitle);
     }
 
-    public static void waitForInvisibilityOf (WebElement webElement){
+    public static void waitForInvisibilityOf(WebElement webElement) {
         Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.invisibilityOf(webElement));
+    }
+
+    /**
+     * This method will accept a String as expected value d verify with actual URL CONTAINS the value
+     * @param expectedInURL
+     */
+    public static void verifyURLContains(String expectedInURL) {
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(expectedInURL));
+    }
+
+    /**
+     * This method accept a dropdown as a web element
+     * and return all the options' text in a List of String
+     * @param dropdownElement
+     * @return
+     */
+    public static List<String> dropDownsOptionsAsString (WebElement dropdownElement){
+        Select select = new Select(dropdownElement);
+        List<WebElement> actualOptionsAsWebElement = select.getOptions();
+
+        List<String> actualOptionsAsString = new ArrayList<>();
+
+//Basically we are getting each Web Element and getting the text of them and adding to the List
+        for (WebElement each : actualOptionsAsWebElement) {
+            actualOptionsAsString.add(each.getText());
+        }
+        return actualOptionsAsString;
     }
 }
